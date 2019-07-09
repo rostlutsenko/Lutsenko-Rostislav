@@ -53,16 +53,20 @@ function showOrders(array) {
         input.setAttribute('max', 50);
         remove.classList.add('remove');
         remove.setAttribute('data-index', index);
-        remove.addEventListener('click', removeItem);
+        remove.addEventListener('click', showPopup);
 
         orderPrice.classList.add('order__price');
         orderPrice.setAttribute('data-index', index);
 
         input.addEventListener('change', changeAmount);
 
-        h4.innerText  = elem.productName.replace(/_/g, ' ').toUpperCase();
-        ref.innerText = 'Ref 13515/234';
-        orderColor.innerText = 'Color';
+        if(elem.productName.replace(/_/g, ' ').toUpperCase() === 'NULL')
+            h4.innerText = 'TheSololist';
+        else
+            h4.innerText = elem.productName.replace(/_/g, ' ').toUpperCase();
+        
+            ref.innerText = 'Ref 13515/234';
+        orderColor.innerText = elem.productColor;
         orderSize.innerText  = elem.productSize.toUpperCase();
         orderPrice.innerText = (elem.productPrice * elem.amount).toFixed(2);
 
@@ -135,16 +139,35 @@ function changeAmount(e) {
     amount.innerText   = amountValue;
 }
 
-function removeItem(e) {
-
+function showPopup(e) {
     const currentIndex = e.target.getAttribute('data-index');
+    const popupWrapper = document.querySelector('.popup--wrapper');
+    const btnDelete    = document.querySelector('.btn--delete');
 
+    popupWrapper.classList.remove('d-none');
+    btnDelete.setAttribute('data-index', currentIndex);
+
+}
+
+const popup = document.querySelector('.popup');
+
+popup.addEventListener('click', function(e){
+    if (e.target.classList.contains('btn--delete'))
+        removeItem(parseInt(e.target.getAttribute('data-index')));
+    else {
+        const popupWrapper = document.querySelector('.popup--wrapper');
+        popupWrapper.classList.add('d-none');
+    }
+});
+
+function removeItem(currentIndex) {
+    const popupWrapper = document.querySelector('.popup--wrapper');
+    
     products.splice(currentIndex, 1);
-
     showOrders(products);
-
     localStorage['poltavarost'] = JSON.stringify(products);
 
+    popupWrapper.classList.add('d-none');
 }
 
 const order = document.querySelector('.order');

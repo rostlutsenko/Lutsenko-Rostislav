@@ -759,15 +759,18 @@ footer {
     line-height: 1.7;
 }
 
-.sizes input[type='radio'] {
+.sizes input[type='radio'],
+.colors input[type='radio'] {
     display: none
 }
 
-.sizes {
+.sizes,
+.colors {
     margin: 0 0 2rem 0;
 }
 
-.sizes__list {
+.sizes__list,
+.colors__list {
     list-style: none;
     display: flex;
     justify-content: center;
@@ -775,15 +778,18 @@ footer {
     margin: 0;
 }
 
-.sizes li {
+.sizes li,
+.colors li {
     margin: 0 1rem 0 0;
 }
 
-.sizes li:last-of-type {
+.sizes li:last-of-type,
+.colors li:last-of-type {
     margin: 0;
 }
 
-.sizes label {
+.sizes label,
+.colors label {
     display: inline-block;
     width: 40px;
     height: 40px;
@@ -793,7 +799,12 @@ footer {
     cursor: pointer;
 }
 
-.sizes input[type='radio']:checked ~ label {
+.colors label {
+    width: 60px;
+}
+
+.sizes input[type='radio']:checked ~ label,
+.colors input[type='radio']:checked ~ label {
     border: 1px solid #DA6D26;
     color: #DA6D26;
 }
@@ -850,7 +861,7 @@ footer {
     margin: 0 0 2rem 0;
 }
 
-.order-items__list::after {
+.order-items__list:empty::after {
     content: 'Your bag is empty :(';
     position: absolute;
     top: 50%;
@@ -1049,6 +1060,48 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .remove::after {
     transform: translate(-50%, -50%) rotate(135deg);
+}
+
+.popup--wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .2);
+}
+
+.popup {
+    width: fit-content;
+    width: -webkit-fit-content;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1.5rem;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    font-size: 1.5rem;
+}
+
+.popup p {
+    margin: 0 0 1.25rem 0;
+    text-align: center;
+}
+
+.btn--delete,
+.btn--cancel {
+    font-size: 1.15rem;
+}
+
+.btn--delete {
+    margin: .5rem 1rem 0 0;
+    padding: 0;
+}
+
+.btn--cancel {
+    padding: .5rem 1.5rem;
+    margin: 0;
 }
 
 
